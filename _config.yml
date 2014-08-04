@@ -1,0 +1,12 @@
+# Site settings
+title: Payam Behjat
+email: 
+description: "My Pet Projects"
+baseurl: ""
+url: "PayamBen.github.io"
+twitter_username:
+github_username:
+
+# Build settings
+markdown: kramdown
+permalink: pretty
