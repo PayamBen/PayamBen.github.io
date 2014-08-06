@@ -9,4 +9,4 @@ Writing this post leads me to think why I should create a github page at all? Ba
 
 If you like my work and are consider hiring me then get in [touch][about-link]
 
-[about-link]: /about/
+[about-link]: /contact/

@@ -84,11 +84,11 @@ a:visited { color: #205caa; }
 
 .site-nav .menu-icon { display: none; }
 
-.site-nav .page-link {
+/*.site-nav .page-link {
   margin-left: 20px;
   color: #727272;
   letter-spacing: -.5px;
-}
+}*/
 
 /* Site footer */
 
@@ -170,7 +170,7 @@ a:visited { color: #205caa; }
 
 .posts li { margin-bottom: 30px; }
 
-.posts .post-link {
+.posts .post-link, .page-link {
   font-size: 24px;
   letter-spacing: -1px;
   line-height: 1;
