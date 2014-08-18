@@ -334,10 +334,14 @@ function resetGame() {
 		if ($(this).hasClass('disabled')) {
 			$(this).removeClass('disabled');
 		}
+		if ($(this).hasClass('pause')) {
+			$(this).removeClass('pause');
+		}
 	}); // end each
 	$('#variables').html('');
 	userVariables = [];
 	$('#notice').fadeOut();
+	
 }
 
 
@@ -413,6 +417,10 @@ $(function() {
 	
 	$('.sign').click(function() {
 		
+		if ($(this).hasClass('pause')) {
+			return;
+		}
+		
 		$('.card').each(function() {
 			if ($(this).hasClass('pause')) {
 				$(this).removeClass('pause');
@@ -421,6 +429,8 @@ $(function() {
 		
 		if ($(this).text() == 'C') {
 			$('#answer').text('');
+			$('#variables').text('');
+			userVariables = [];
 			$('.card').each(function() {
 				if ($(this).hasClass('disabled')) {
 					$(this).removeClass('disabled');
@@ -437,9 +447,26 @@ $(function() {
 			$('#variables').append('<div class="variable" id="' + tmp + '">x' +  tmp +'</div>');
 			$('#' + tmp).bind( "click", function() {
 				$('#answer').append( $(this).text());
+				
+				//aim: enable operators
+				$('.sign').each(function() {
+					if ($(this).hasClass('pause')) {
+						$(this).removeClass('pause');
+					}		
+				}); // end each
+				
+				$('#' + tmp).unbind("click");
 			}); // end bind
 			$('#answer').append(';<br>');
 		}
+		
+		//disable operators
+		//aim: only allow one number to be inserted at a time
+		$('.sign').each(function() {
+			if ($(this).attr("id") != "clear") {
+				$(this).addClass('pause');
+		}
+		}); // end each
 		
 	}); // end click
 	
@@ -460,16 +487,32 @@ $(function() {
 			}
 			
 		}); // end each
+		
+		//aim: enable operators
+		$('.sign').each(function() {
+			if ($(this).hasClass('pause')) {
+				$(this).removeClass('pause');
+			}
+			
+		}); // end each
 	}); // end click
 	
 	$('#notice').click(function() {
 		$(this).fadeOut(300);
 	}); // end click
 	
+	/*
 	$('.variable').click(function() {
 		$('#answer').append( $(this).text());
 		
+		//aim: enable operators
+		$('.sign').each(function() {
+			if ($(this).hasClass('pause')) {
+				$(this).removeClass('pause');
+			}
+			
+		}); // end each
 		
-	}); // end click
+	}); // end click*/
 	
 }); // end Ready
