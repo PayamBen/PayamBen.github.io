@@ -51,12 +51,17 @@ function calculate(numsArr, signsArrArr, target) {
 			}
 		}
 		if (sum == target) {
-			//create answer
-			
-			var anaswer;
-			answer = numsArr[0] + signsArrArr[i][0] + numsArr[1];
+			// create formatted answer
+			/*var anaswer;
+			answer = "(" + numsArr[0] + signsArrArr[i][0] + numsArr[1] + ")";
 			for(var j = 1; j < signsArrArr[i].length ; j++) {
 				answer += signsArrArr[i][j] + numsArr[j + 1];
+			}
+			return answer*/
+			answer = "(" + numsArr[0] + signsArrArr[i][0] + numsArr[1] + ")";
+			for(var j = 1; j < signsArrArr[i].length ; j++) {
+				answer += signsArrArr[i][j] + numsArr[j + 1] + ")";
+				answer = "(" + answer;
 			}
 			return answer
 		} 
@@ -69,8 +74,6 @@ function calculate(numsArr, signsArrArr, target) {
 //repeatedPermutation = n^n
 //repeatedPermuationslen = n^len
 //permutationLen = n*n-1*..n-len
-
-//console.log(permute([5, 3, 7, 1]));
 
 var permArr = [], usedChars = [];
 	
