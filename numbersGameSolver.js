@@ -78,7 +78,7 @@ function solver(numbers, target) {
 	var signs = ['+','-','/','*'];
 	var permN;
 	var permS;
-	var fpund =false;
+	var found = false;
 	var answer = "";
 	console.log(numbers + " target = " + target);
 	outer:
