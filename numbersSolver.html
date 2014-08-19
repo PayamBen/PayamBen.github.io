@@ -94,9 +94,10 @@ $(function() {
 			numbers.push(parseInt($('#num' + i).val()));
 		}
 		var answer = solver(numbers, target);
-		console.log(answer);
 		if (answer) {
 			$('#answer').text(answer);
+		}else {
+			$('#answer').text('no solutions found');
 		}
 		
 	})// end click
