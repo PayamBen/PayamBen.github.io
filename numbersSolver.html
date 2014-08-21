@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Numbers Game Solver
-permalink: /numbers-solver/
+title: Numbers Round Solver
+permalink: /countdown-numbers-solver/
 ---
 <style>
 	html {
@@ -50,6 +50,7 @@ permalink: /numbers-solver/
 		margin: 0 0 10px 0;
 		display: inline;
 		width: 20px;
+		text-align: center;
 }
 
 .button-green{
@@ -81,6 +82,8 @@ permalink: /numbers-solver/
 		<input id="num4" type="text"/>
 		<input id="num5" type="text"/>
 		<span class="button-green" id="solveIt">Solve</span><div id="answer"></div>
+		<div>All answers are provided in reverse polish notation.</div>
+		<div></div>
 	</div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 
@@ -91,7 +94,6 @@ permalink: /numbers-solver/
 		var newPuzzle;
 		var count = 0;
 		$('#container').css('cursor','wait');
-		//$.get("http://archives.smoothwebs.co.uk/make-puzzle.php?level=" + level, function( data ) {
 		$.get("http://archives.smoothwebs.co.uk/process.php?n1=" + nums[0] + "&n2=" + nums[1] + "&n3=" + nums[2] + "&n4=" + nums[3] + "&n5=" + nums[4] + "&n6=" + nums[5] + "&target="+ target, function( data ) {
 		
 			console.log(data);
@@ -107,11 +109,6 @@ permalink: /numbers-solver/
 				numbers.push(parseInt($('#num' + i).val()));
 			}
 			solvePuzzle(numbers, target)
-			/*if (answer) {
-				$('#answer').text(answer);
-			}else {
-				$('#answer').text('no solutions found');
-			}*/
 			
 		})// end click
 	});//end ready
