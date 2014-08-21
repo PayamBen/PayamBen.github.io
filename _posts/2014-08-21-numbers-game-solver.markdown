@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Numbers Game Solver"
-date:   2014-08-13 16:38:00
+date:   2014-08-21 17:00:00
 categories: game basic
 ---
 
