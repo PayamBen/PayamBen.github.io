@@ -67,6 +67,10 @@ permalink: /countdown-numbers-solver/
     background: rgb(28, 184, 65);
     border-color: rgb(28, 184, 65);
 }
+
+.disabled {
+	cursor: default;
+}
 	
 	
 </style>
@@ -81,7 +85,8 @@ permalink: /countdown-numbers-solver/
 		<input id="num3" type="text"/>
 		<input id="num4" type="text"/>
 		<input id="num5" type="text"/>
-		<span class="button-green" id="solveIt">Solve</span><div id="answer"></div>
+		<span class="button-green" id="solveIt">Solve</span>
+		<div id="answer"></div>
 		<div>All answers are provided in reverse polish notation.</div>
 		<div></div>
 	</div>
@@ -100,9 +105,20 @@ permalink: /countdown-numbers-solver/
 			$('#answer').text(data);
 		});
 	}
-
+	
 	$(function() {
+		
+		$(':input').blur(function() {
+			if ($('#solveIt').hasClass('disabled')) {
+				$('#solveIt').removeClass('disabled');
+			}
+		}); // end blue
+		
 		$('#solveIt').click(function() {
+			if ($('#solveIt').hasClass('disabled')) {
+				return
+			}
+			$('#solveIt').addClass('disabled');
 			var numbers = [];
 			var target = parseInt($('#target').val()) || 0;
 			if (target <= 0) {
@@ -124,9 +140,13 @@ permalink: /countdown-numbers-solver/
 					return
 				}
 			}
+			$('#havePatience').removeClass('hidden');
+			$('#havePatience').addClass('seen');
+			
 			solvePuzzle(numbers, target)
 			
 		})// end click
+		
 	});//end ready
 	
 </script>
