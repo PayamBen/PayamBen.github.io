@@ -104,9 +104,25 @@ permalink: /countdown-numbers-solver/
 	$(function() {
 		$('#solveIt').click(function() {
 			var numbers = [];
-			var target = parseInt($('#target').val());
+			var target = parseInt($('#target').val()) || 0;
+			if (target <= 0) {
+				$('#answer').text("target is too small");
+				return
+			}
+			if (target >= 50000) {
+				$('#answer').text("target is too big");
+				return
+			}
 			for(var i = 0; i <= 5; i++) {
-				numbers.push(parseInt($('#num' + i).val()));
+				numbers.push(parseInt($('#num' + i).val()) || 0);
+				if (numbers[i] >= 500) {
+					$('#answer').text("largest card value allowed is 500");
+					return
+				}
+				if (numbers[i] <= 0) {
+					$('#answer').text("smallest card value allowed is 1");
+					return
+				}
 			}
 			solvePuzzle(numbers, target)
 			
