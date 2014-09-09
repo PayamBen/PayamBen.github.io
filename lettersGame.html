@@ -94,6 +94,7 @@ permalink: /letters-numbers-solver/
 		var newPuzzle;
 		var count = 0;
 		$('#container').css('cursor','wait');
+		$('#answer').text('...please wait\nThe server response may take a few seconds.');
 		$.get("http://archives.smoothwebs.co.uk/lettersGame5.php?letters=" + letters, function( data ) {
 		
 			console.log(data);
@@ -121,8 +122,8 @@ permalink: /letters-numbers-solver/
 			}
 			$('#havePatience').removeClass('hidden');
 			$('#havePatience').addClass('seen');
-			
 			solvePuzzle(letters);
+			
 			
 		})// end click
 		
