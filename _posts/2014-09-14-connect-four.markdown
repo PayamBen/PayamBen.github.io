@@ -5,7 +5,6 @@ date:   2014-09-10 18:00:00
 categories: game basic
 ---
 
-
 Following on from my last game, I wanted to test the negamax algorith on a large search space. On a classic sized board there are 4,531,985,219,092 positions. [Try It Now][play-link]
 
 [play-link]: /connect-four/
