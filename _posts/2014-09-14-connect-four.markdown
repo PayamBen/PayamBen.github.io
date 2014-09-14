@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Connect Four"
-date: 2014-09-10 18:00:00
+date: 2014-09-14 18:00:00
 categories: game
 ---
 
