@@ -137,7 +137,7 @@ function checkWinner() {
 				noConnection = 0;
 			}
 			if (noConnection >= 3) {
-				//console.log("found v " + noConnection + " coin = " + prevCoin + " col " + c);
+				console.log("found v " + noConnection + " coin = " + prevCoin + " col " + c);
 				return prevCoin;
 				
 			}
@@ -159,7 +159,7 @@ function checkWinner() {
 					noConnection = 0;
 				}
 				if (noConnection >= 3) {
-					//console.log("found h " + noConnection + " coin = " + prevCoin + " row " + r);
+					console.log("found h " + noConnection + " coin = " + prevCoin + " row " + r);
 					return prevCoin;	
 				}
 				prevCoin = gameState[c][r];
@@ -195,7 +195,7 @@ function checkWinner() {
 				noConnection++;
 			}
 			if (noConnection >= 3) {
-				//console.log("found d " + noConnection + " coin = " + prevCoin);
+				console.log("found d " + noConnection + " coin = " + prevCoin);
 				return prevCoin;	
 			}
 			noConnection = 0;
@@ -222,7 +222,7 @@ function checkWinner() {
 				noConnection++;
 			}
 			if (noConnection >= 3) {
-				//console.log("found d2 " + noConnection + " coin = " + prevCoin);
+				console.log("found d2 " + noConnection + " coin = " + prevCoin);
 				return prevCoin;	
 			}
 			noConnection = 0;
@@ -440,6 +440,7 @@ $(function() {
 		
 		var col = calculateSelectedColumn(e);
 		addCoin(col, player);
+		playersTurn = !playersTurn;
 		if (checkWinner() != 0) {
 			console.log("player = " + player);
 			console.log(gameState);
@@ -449,8 +450,6 @@ $(function() {
 		if (checkTie()) {
 			status("it's a draw");
 		}
-		playersTurn = !playersTurn;
-		status("Exploring possible moves");
 		nextMove();
 		
 	}); // end click
