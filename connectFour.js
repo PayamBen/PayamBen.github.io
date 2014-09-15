@@ -10,7 +10,7 @@ var playersTurn;
 var gameState = [[]];
 var INFTY = 100000;
 var boardSize = [300, 257];
-var maxDepth = 3; //4 = hard, 3=medium, 2=easy
+var maxDepth = 3; //4 = hard, 3=medium, 2=easy, 1 = beginner
 var useBookMoves = true;
 
 // function used to allow future improvements 
@@ -246,7 +246,10 @@ function startGame(rdOrYllw, level) {
 		gameState[x] = temp.slice();
 	}
 	
-	if (level == "easy") {
+	if (level == "beginner") {
+		maxDepth = 1;
+		$('#DisplayLevel').text("Level: Beginner");
+	}else if (level == "easy") {
 		maxDepth = 2;
 		$('#DisplayLevel').text("Level: Easy");
 	}else if (level == "medium") {
@@ -301,10 +304,12 @@ function drawBoard() {
 	var vp = viewport();
 	if (vp['width'] > 500) {
 		setCanvasSize(500,428, ctx);
+		ctx.font = "50px Arial";
 		w = 500;
 		h = 428;
 	}else {
 		setCanvasSize(300,257, ctx);
+		ctx.font = "30px Arial";
 		w = 300;
 		h = 257;
 	}
@@ -323,6 +328,42 @@ function drawBoard() {
 		ctx.lineTo(w , i * clSze);
 		ctx.stroke();
 	}
+	ctx.fillStyle="#fff";
+	//circular holes
+	for(var c = 0; c <= 6; c++) {
+		for(var r = 0; r <= 5; r++) {
+			ctx.beginPath();
+			ctx.arc(clSze * c + (clSze * 0.5) + 2,r * clSze + (clSze * 0.5),clSze / 2,0,2*Math.PI);
+			ctx.fill();
+		}
+	}
+	
+	if (vp['width'] > 500) {
+		
+	}
+	
+	ctx.fillStyle = "#FFFF00";
+	//Add logo
+	var word = "four";
+	var i = 0;
+	for(var r = 4; r <= 5; r++) {
+		for(var c = 8 - word.length; c <= 7; c++, i++) {
+			ctx.fillText(word.charAt(i), c * clSze - (clSze / 2) , (r + 0.75) * clSze);
+		}
+		word = "connect";
+		ctx.fillStyle = "#FF0000";
+		i = 0;
+	}
+	/*
+	ctx.fillStyle = "#FF0000";
+	//ctx.font = "50px Arial";
+	var ctext = "Connect".split("").join(String.fromCharCode(8192) + String.fromCharCode(8196))
+	ctx.fillText(ctext, clSze / 2, h - clSze / 4);
+	ctx.fillStyle = "#FFFF00";
+	var ctext = "Four".split("").join(String.fromCharCode(8192) + String.fromCharCode(8196))
+	ctx.fillText(ctext, w / 2, h - clSze * 1.25);
+	
+	*/
 }
 
 function calculateSelectedColumn(e) {
@@ -350,7 +391,7 @@ function addCoin(columnNo, rOrY) {
 	var row = 6 - (y + 1);
 	
 	ctx.beginPath();
-	ctx.arc(cellSize * columnNo + (cellSize * 0.5),row * cellSize + (cellSize * 0.5),cellSize / 2,0,2*Math.PI);
+	ctx.arc(cellSize * columnNo + (cellSize * 0.5) + 2,row * cellSize + (cellSize * 0.5),cellSize / 2,0,2*Math.PI);
 	if (rOrY == 'r') {
 		ctx.fillStyle="#FF0000";
 	}else {
