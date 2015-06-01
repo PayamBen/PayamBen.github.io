@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Numbers Game Post"
+title:  "Numbers Game"
 date:   2014-08-13 16:38:00
 categories: game basic
 ---
