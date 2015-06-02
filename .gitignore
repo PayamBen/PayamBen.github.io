@@ -1,3 +1,7 @@
 _site
+#ignore old page
 index-old.html
+#ignore old page
 sudoku-old.html
+#ignore backup files
+*~
