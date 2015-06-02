@@ -70,6 +70,11 @@ permalink: /countdown-numbers-solver/
 .disabled {
 	cursor: default;
 }
+
+#answer {
+	width: 75%;
+	margin: 10px auto;
+}
 	
 	
 </style>
@@ -98,6 +103,7 @@ permalink: /countdown-numbers-solver/
 		var newPuzzle;
 		var count = 0;
 		$('#container').css('cursor','wait');
+$('#answer').text('...please wait\nThe server response may take a few seconds.');
 		$.get("http://archives.smoothwebs.co.uk/process.php?n1=" + nums[0] + "&n2=" + nums[1] + "&n3=" + nums[2] + "&n4=" + nums[3] + "&n5=" + nums[4] + "&n6=" + nums[5] + "&target="+ target, function( data ) {
 		
 			console.log(data);
