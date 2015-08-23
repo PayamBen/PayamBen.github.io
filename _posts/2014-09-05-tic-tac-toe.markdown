@@ -7,4 +7,4 @@ categories: game basic
 
 I recently heard of the negamax search, which is a alternative to minimax but with simpler implementation. I am interested to see how well a chess solver will perform with negamax with and without alpha-beta optimization. [Try It Now][play-link].
 
-[play-link]: /http://mibz.uk/tictactoe/
+[play-link]: http://mibz.uk/tictactoe/

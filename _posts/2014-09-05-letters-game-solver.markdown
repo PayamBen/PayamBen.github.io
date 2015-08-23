@@ -8,4 +8,4 @@ categories: game basic
 The Letters Round is the heart of the Countdown game show, and after creating a game and solver for the numbers round I felt obliged to create a solver for the Letters Round.[Try It Now][play-link].
 
 
-[play-link]: /http://mibz.uk/letters-game-solver/
+[play-link]: http://mibz.uk/letters-game-solver/

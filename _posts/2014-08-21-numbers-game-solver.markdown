@@ -13,4 +13,4 @@ I continued to create the Numbers Round Solver despite not requiring a solver fo
 
 
 [Numbers Game]: /http://mibz.uk/countdown-numbers-game/
-[play-link]: /http://mibz.uk/numbers-game-solver/
+[play-link]: http://mibz.uk/numbers-game-solver/

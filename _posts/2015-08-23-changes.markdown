@@ -14,4 +14,4 @@ In my case all of the server side processing for the games and apps I developed 
 
 All my previous and future post will be held [here][new-site]
 
-[new-site]: /http://mibz.uk/
+[new-site]: http://mibz.uk/
