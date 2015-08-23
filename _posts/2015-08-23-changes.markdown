@@ -1,0 +1,17 @@
+---
+layout: post
+title: "New Site"
+date: 2015-08-23 09:30:00
+categories: Server
+---
+
+###New profile website [Mibz.uk][new-site]
+
+####Why Move?
+In a word I needed more freedom. Github in junction with Jekyll has put together a tidy blogging platform which is a pleasure to use. The platform is also very secure, however the security has restricted what can be performed on the server. 
+
+In my case all of the server side processing for the games and apps I developed had to be preformed on another server. It has been possible to hide the seams of this disjointness with AJAX calls but this isn't an option if you want to place your code and website on the same domain.
+
+All my previous and future post will be held [here][new-site]
+
+[new-site]: /http://mibz.uk/

@@ -12,4 +12,4 @@ While working through some project Euler challenges, I programmed a backtracking
 
 [solver]: https://github.com/PayamBen/projectEuler/tree/master/c%2B%2B/pe-problem96
 [phone-link]: https://build.phonegap.com/apps/1034965/share
-[play-link]: /sudoku-solver/
+[play-link]: /http://mibz.uk/solve-it-sudoku/
