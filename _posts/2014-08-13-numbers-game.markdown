@@ -10,4 +10,4 @@ In the UK there is a cult TV series called Countdown. The program tests contesta
 I created a fairly easy to use game, based on the numbers game. The app once again is created in JavaScript, HTML and CSS, allowing the game to be converted into an app for most smart phones.
 [Play Now][play-link].
 
-[play-link]: http://mibz.uk/countdown-numbers-game/
+[play-link]: https://payamben.github.io/numbers-game/
