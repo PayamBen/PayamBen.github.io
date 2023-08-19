@@ -12,5 +12,5 @@ It became clear that it was faster to compute the total by randomly selecting nu
 I continued to create the Numbers Round Solver despite not requiring a solver for the actual game. It proved to be an interesting project, and a handy little app. [Try It Now][play-link].
 
 
-[Numbers Game]: /http://mibz.uk/countdown-numbers-game/
-[play-link]: http://mibz.uk/numbers-game-solver/
+[Numbers Game]: https://payamben.github.io/numbers-game/
+[play-link]: https://payamben.github.io/countdown-numbers-solver/
