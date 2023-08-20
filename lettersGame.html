@@ -94,8 +94,9 @@ permalink: /letters-numbers-solver/
 		var count = 0;
 		$('#container').css('cursor','wait');
 		$('#answer').text('...please wait\nThe server response may take a few seconds.');
-		$.get("http://archives.smoothwebs.co.uk/lettersGame5.php?letters=" + letters, function( data ) {
-		
+		//$.get("http://archives.smoothwebs.co.uk/lettersGame5.php?letters=" + letters, function( data ) 
+		$.get("https://pethippo.rf.gd/lettersGame5.php?letters=" + letters, function( data ) 
+		      {
 			console.log(data);
 			$('#answer').text(data);
 		});
