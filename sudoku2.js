@@ -124,9 +124,18 @@ function makeArray() {
 	return grid;
 }
 
+function getBoard() {
+	var grid = new Array;
+	for(var i = 1; i <= 81; ++i)
+	{
+		grid[i - 1] = parseInt($('#' + i).html());
+	}
+	return grid;
+}
+
 function make2DArray() {
 	let result = [];
-	var grid = makeArray();
+	var grid = getBoard()();
 	for(let i = 0; i < grid.length; i+= 9) {
 		result.push(grid.slice(i, i + 9));
 	}
