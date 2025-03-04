@@ -128,7 +128,7 @@ function make2DArray() {
 	let result = [];
 	var grid = makeArray();
 	for(let i = 0; i < grid.length; i+= 9) {
-		result.push(arr.slice(i, i + 9));
+		result.push(grid.slice(i, i + 9));
 	}
 	return result;
 }
