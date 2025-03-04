@@ -416,20 +416,20 @@ $(function() {
 	}); //end click
 
 	$('#hint').click(function() {
-		resetBorderColor();
-		var grid = makeArray();
+		//resetBorderColor();
+		//var grid = makeArray();
 		//if(!legalTable(grid)) {
-			$('#message').text("looking for hint");
-			$('#message').show();
-			return;
-		}
+		$('#message').text("looking for hint");
+		$('#message').show();
+			//return;
+		//}
 		//var status = oneSolution(grid,0,0);
 		
 		//if(status > 1) {
 		//	$('#message').text("No unique solutions!");
 		//	$('#message').show();
 		//	return;
-		}
+		//}
 		//updateDisplay(answer);
 	});//end click
 	
