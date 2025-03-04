@@ -282,24 +282,20 @@ $(function() {
 	$('.txtBox').click(function() {
 		if ($(this).hasClass('changeable') || $('#inputPuzzle').hasClass('largeButton')) {
 				
-			console.log('one');
 			if ($('.selected').html() == '&nbsp;') {
 				$(this).html('&nbsp;');
 				$(this).removeClass('wrongAnswer');
 				return
 			}
-			console.log('two');
 			var num = parseInt($('.selected').text());
 			$(this).removeClass('wrongAnswer');
 			$(this).text(num);
-			console.log('three');
 			if (!$('#inputPuzzle').hasClass('largeButton'))
 			{
 				if (answer.length <= 0) {
 					var grid = makeArray();
 					solve(grid, 0);
 				}
-				console.log('four');
 				if (puzzleComplete(answer) > 0) {
 					if (quitPuzzle) {
 						alert("Finished, however you requested the solution during the game");
@@ -308,7 +304,6 @@ $(function() {
 						alert("Puzzle Correctly Finished!");
 					}
 				}
-				console.log('five');
 			}
 			
 		}
@@ -428,8 +423,9 @@ $(function() {
 		//if(!legalTable(grid)) {
 		$('#message').text("looking for hint");
 		$('#message').show();
-		var twoDGrid = make2DArray();
-		console.log(twoDGrid);
+		findPossibleSquare();
+		//var twoDGrid = make2DArray();
+		//console.log(twoDGrid);
 			//return;
 		//}
 		//var status = oneSolution(grid,0,0);
@@ -443,7 +439,21 @@ $(function() {
 	});//end click
 
 	function findPossibleSquare() {
-
+		var twoDGrid = make2DArray();
+		console.log(twoDGrid);
+		var possibleNumbers;
+		for(let x = 0; x < 9; x++) {
+			for(let y = 0; y < 9; y++) {
+				if (twoDGrid[x][y] == 0) {
+					possibleNumbers = getPossibleNumbers(twoDGrid,x,y);
+					if (possibleNumbers.length = 1) {
+						$('#message').text("look at x=" + x + " y=" + y);
+						return;
+					}
+				}
+			}
+		}
+		$('#message').text("Sorry I couldn't find anything");
 	}
 
 	function getPossibleNumbers(grid, row, col) {
@@ -475,18 +485,6 @@ $(function() {
 		return Array.from(possibleNumbers);
 	}
 	
-	// Example Sudoku grid (0 represents an empty cell)
-	/*let sudokuGrid = [
-		[5, 3, 0, 0, 7, 0, 0, 0, 0],
-		[6, 0, 0, 1, 9, 5, 0, 0, 0],
-		[0, 9, 8, 0, 0, 0, 0, 6, 0],
-		[8, 0, 0, 0, 6, 0, 0, 0, 3],
-		[4, 0, 0, 8, 0, 3, 0, 0, 1],
-		[7, 0, 0, 0, 2, 0, 0, 0, 6],
-		[0, 6, 0, 0, 0, 0, 2, 8, 0],
-		[0, 0, 0, 4, 1, 9, 0, 0, 5],
-		[0, 0, 0, 0, 8, 0, 0, 7, 9]
-	];*/
 	
 	// Example: Get possible numbers for position (0,2)
 	//let row = 0, col = 2;
