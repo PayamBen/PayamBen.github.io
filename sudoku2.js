@@ -442,8 +442,8 @@ $(function() {
 		var twoDGrid = make2DArray();
 		//console.log(twoDGrid);
 		var possibleNumbers;
-		for(let x = 0; x < 9; x++) {
-			for(let y = 0; y < 9; y++) {
+		for(let y = 0; y < 9; y++) {
+			for(let x = 0; x < 9; x++) {
 				if (twoDGrid[x][y] == 0) {
 					possibleNumbers = getPossibleNumbers(twoDGrid,x,y);
 					console.log(possibleNumbers);
