@@ -447,7 +447,7 @@ $(function() {
 				if (twoDGrid[x][y] == 0) {
 					possibleNumbers = getPossibleNumbers(twoDGrid,x,y);
 					console.log(possibleNumbers);
-					if (possibleNumbers.length = 1) {
+					if (possibleNumbers.length == 1) {
 						$('#message').text("look at x=" + x + " y=" + y);
 						return;
 					}
