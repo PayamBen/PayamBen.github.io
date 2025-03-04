@@ -128,7 +128,7 @@ function getBoard() {
 	var grid = new Array;
 	for(var i = 1; i <= 81; ++i)
 	{
-		grid[i - 1] = parseInt($('#' + i).html());
+		grid[i - 1] = parseInt($('#' + i).html()) || 0;
 	}
 	return grid;
 }
