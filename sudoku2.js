@@ -135,7 +135,7 @@ function getBoard() {
 
 function make2DArray() {
 	let result = [];
-	var grid = getBoard()();
+	var grid = getBoard();
 	for(let i = 0; i < grid.length; i+= 9) {
 		result.push(grid.slice(i, i + 9));
 	}
