@@ -95,10 +95,8 @@ function oneSolution(grid, position, count)
 		  //console.log("position = " + position + " number " + num );
 		  if( isLegal(grid, position, num))
 		  {
-			 //console.log("valid");
 			 grid[position] = num;
 			 // Delegate work on the next cell to a recursive call
-			 
 			 count = oneSolution(grid,position + 1, count);
 		  }
 	   }
@@ -367,7 +365,7 @@ $(function() {
 		}
 		resetBorderColor();
 		$('#proNum').text("");
-		$('#inputPuzzle').text('Finsh')
+		$('#inputPuzzle').text('Finish')
 		$('.button').each(function() {
 			if ($(this).attr('id') != 'inputPuzzle' && $(this).attr('id') != 'clear') {
 				$(this).hide();
