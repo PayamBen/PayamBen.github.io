@@ -342,6 +342,8 @@ $(function() {
 			$('#message').show();
 			return;
 		}
+		$('#message').text("");
+		$('#message').hide();
 		markWrongAnswers(answer);
 	}); // end click
 	
