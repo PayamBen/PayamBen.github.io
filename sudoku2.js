@@ -444,11 +444,11 @@ $(function() {
 		var possibleNumbers;
 		for(let y = 0; y < 9; y++) {
 			for(let x = 0; x < 9; x++) {
-				if (twoDGrid[x][y] == 0) {
-					possibleNumbers = getPossibleNumbers(twoDGrid,x,y);
+				if (twoDGrid[y][x] == 0) {
+					possibleNumbers = getPossibleNumbers(twoDGrid,y,x);
 					console.log(possibleNumbers);
 					if (possibleNumbers.length == 1) {
-						$('#message').text("look at x=" + x + " y=" + y);
+						$('#message').text("Check x=" + x + " y=" + y);
 						return;
 					}
 				}
