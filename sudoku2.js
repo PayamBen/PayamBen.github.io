@@ -440,12 +440,13 @@ $(function() {
 
 	function findPossibleSquare() {
 		var twoDGrid = make2DArray();
-		console.log(twoDGrid);
+		//console.log(twoDGrid);
 		var possibleNumbers;
 		for(let x = 0; x < 9; x++) {
 			for(let y = 0; y < 9; y++) {
 				if (twoDGrid[x][y] == 0) {
 					possibleNumbers = getPossibleNumbers(twoDGrid,x,y);
+					console.log(possibleNumbers);
 					if (possibleNumbers.length = 1) {
 						$('#message').text("look at x=" + x + " y=" + y);
 						return;
