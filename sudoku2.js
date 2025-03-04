@@ -1,7 +1,6 @@
 var answer = [];
 var quitPuzzle = false;
 
-function hint()
 
 function isLegal(grid, position, value) {
 	//find row number
