@@ -124,6 +124,15 @@ function makeArray() {
 	return grid;
 }
 
+function make2DArray() {
+	let result = [];
+	var grid = makeArray();
+	for(let i = 0; i < grid.length; i+= 9) {
+		result.push(arr.slice(i, i + 9));
+	}
+	return result;
+}
+
 function resetBorderColor() {
 	for(var i = 1; i <= 81; i++) {
 		$('#' + i).removeClass("wrongAnswer");
@@ -419,6 +428,8 @@ $(function() {
 		//if(!legalTable(grid)) {
 		$('#message').text("looking for hint");
 		$('#message').show();
+		var twoDGrid = make2DArray();
+		console.log(twoDGrid);
 			//return;
 		//}
 		//var status = oneSolution(grid,0,0);
@@ -430,6 +441,56 @@ $(function() {
 		//}
 		//updateDisplay(answer);
 	});//end click
+
+	function findPossibleSquare() {
+
+	}
+
+	function getPossibleNumbers(grid, row, col) {
+		if (grid[row][col] !== 0) {
+			return []; // If already filled, return empty list
+		}
+	
+		let possibleNumbers = new Set([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+	
+		// Remove numbers in the same row
+		for (let i = 0; i < 9; i++) {
+			possibleNumbers.delete(grid[row][i]);
+		}
+	
+		// Remove numbers in the same column
+		for (let i = 0; i < 9; i++) {
+			possibleNumbers.delete(grid[i][col]);
+		}
+	
+		// Remove numbers in the same 3x3 box
+		let boxRowStart = Math.floor(row / 3) * 3;
+		let boxColStart = Math.floor(col / 3) * 3;
+		for (let i = 0; i < 3; i++) {
+			for (let j = 0; j < 3; j++) {
+				possibleNumbers.delete(grid[boxRowStart + i][boxColStart + j]);
+			}
+		}
+	
+		return Array.from(possibleNumbers);
+	}
+	
+	// Example Sudoku grid (0 represents an empty cell)
+	/*let sudokuGrid = [
+		[5, 3, 0, 0, 7, 0, 0, 0, 0],
+		[6, 0, 0, 1, 9, 5, 0, 0, 0],
+		[0, 9, 8, 0, 0, 0, 0, 6, 0],
+		[8, 0, 0, 0, 6, 0, 0, 0, 3],
+		[4, 0, 0, 8, 0, 3, 0, 0, 1],
+		[7, 0, 0, 0, 2, 0, 0, 0, 6],
+		[0, 6, 0, 0, 0, 0, 2, 8, 0],
+		[0, 0, 0, 4, 1, 9, 0, 0, 5],
+		[0, 0, 0, 0, 8, 0, 0, 7, 9]
+	];*/
+	
+	// Example: Get possible numbers for position (0,2)
+	//let row = 0, col = 2;
+	//console.log(`Possible numbers for (${row}, ${col}):`, getPossibleNumbers(sudokuGrid, row, col));
 	
 });//end ready
 	
