@@ -432,7 +432,7 @@ $(function() {
 		$('#message').text("looking for hint");
 		$('#message').show();
 		var twoDGrid = make2DArray();
-		let messageText = findPossibleSquare(); 
+		let messageText = findPossibleSquare(twoDGrid); 
 		if(messageText.length == 0) {
 			$('#message').text(getSudokuHint(twoDGrid));
 		} else {
@@ -451,7 +451,7 @@ $(function() {
 					console.log(possibleNumbers);
 					if (possibleNumbers.length == 1) {
 						//$('#message').text("Check x=" + x + " y=" + y);
-						return "Check x=" + x + " y=" + y;
+						return "Check x=" + (x + 1) + " y=" + (y + 1);
 					}
 				}
 			}
