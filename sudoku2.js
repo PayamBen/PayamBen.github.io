@@ -451,7 +451,7 @@ $(function() {
 					console.log(possibleNumbers);
 					if (possibleNumbers.length == 1) {
 						//$('#message').text("Check x=" + x + " y=" + y);
-						return "Check x=" + (x + 1) + " y=" + (y + 1);
+						return "Check row=" + (y + 1) + " col=" + (x + 1);
 					}
 				}
 			}
@@ -476,7 +476,7 @@ $(function() {
 	
 					// If exactly one cell can contain this number, return a hint
 					if (possibleCells.length === 1) {
-						return `Place ${num} in row ${possibleCells[0].row + 1}, col ${possibleCells[0].col + 1}`;
+						return `Place ${num} in Grid row ${ceil(possibleCells[0].row + 1 / 3)}, col ${ceil(possibleCells[0].col + 1 / 3)}`;
 					}
 				}
 			}
