@@ -431,6 +431,7 @@ $(function() {
 	$('#hint').click(function() {
 		$('#message').text("looking for hint");
 		$('#message').show();
+		var twoDGrid = make2DArray();
 		let messageText = findPossibleSquare(); 
 		if(messageText.length == 0) {
 			$('#message').text(getSudokuHint(twoDGrid));
@@ -439,8 +440,8 @@ $(function() {
 		}
 	});//end click
 
-	function findPossibleSquare() {
-		var twoDGrid = make2DArray();
+	function findPossibleSquare(twoDGrid) {
+		
 		//console.log(twoDGrid);
 		var possibleNumbers;
 		for(let y = 0; y < 9; y++) {
