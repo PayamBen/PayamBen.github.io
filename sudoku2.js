@@ -432,9 +432,9 @@ $(function() {
 		$('#message').text("looking for hint");
 		$('#message').show();
 		var twoDGrid = make2DArray();
-		let messageText = findPossibleSquare(twoDGrid); 
+		let messageText = getSudokuHint(twoDGrid); 
 		if(messageText.length == 0) {
-			$('#message').text(getSudokuHint(twoDGrid));
+			$('#message').text(findPossibleSquare(twoDGrid));
 		} else {
 			$('#message').text(messageText);
 		}
@@ -444,19 +444,27 @@ $(function() {
 		
 		//console.log(twoDGrid);
 		var possibleNumbers;
+		var BestSoFar = 9;
+		var BestX;
+		var BestY;
 		for(let y = 0; y < 9; y++) {
 			for(let x = 0; x < 9; x++) {
 				if (twoDGrid[y][x] == 0) {
 					possibleNumbers = getPossibleNumbers(twoDGrid,y,x);
 					console.log(possibleNumbers);
 					if (possibleNumbers.length == 1) {
-						//$('#message').text("Check x=" + x + " y=" + y);
 						return "Check row=" + (y + 1) + " col=" + (x + 1);
+					} else {
+						if(possibleNumbers.length <= BestSoFar) {
+							BestSoFar = possibleNumbers.length;
+							BestX = x + 1;
+							BestY = y + 1
+						}
 					}
 				}
 			}
 		}
-		return "";
+		return "There are " + BestSoFar + " possible numbers at row " +  BestY + " col " + BestX;
 	}
 
 	function getSudokuHint(board) {
@@ -481,7 +489,7 @@ $(function() {
 				}
 			}
 		}
-		return "Sorry I couldn't find anything";
+		return ""//"Sorry I couldn't find anything";
 	}
 	
 	// Check if a number can be placed at board[row][col]
