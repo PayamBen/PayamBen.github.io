@@ -476,7 +476,7 @@ $(function() {
 	
 					// If exactly one cell can contain this number, return a hint
 					if (possibleCells.length === 1) {
-						return `Place ${num} in Grid row ${Math.ceil(possibleCells[0].row + 1 / 3)}, col ${Math.ceil(possibleCells[0].col + 1 / 3)}`;
+						return `Place ${num} in Grid row ${Math.ceil((possibleCells[0].row + 1) / 3)}, col ${Math.ceil((possibleCells[0].col + 1) / 3)}`;
 					}
 				}
 			}
