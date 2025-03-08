@@ -429,24 +429,14 @@ $(function() {
 	}); //end click
 
 	$('#hint').click(function() {
-		//resetBorderColor();
-		//var grid = makeArray();
-		//if(!legalTable(grid)) {
 		$('#message').text("looking for hint");
 		$('#message').show();
-		findPossibleSquare();
-		//var twoDGrid = make2DArray();
-		//console.log(twoDGrid);
-			//return;
-		//}
-		//var status = oneSolution(grid,0,0);
-		
-		//if(status > 1) {
-		//	$('#message').text("No unique solutions!");
-		//	$('#message').show();
-		//	return;
-		//}
-		//updateDisplay(answer);
+		let messageText = findPossibleSquare(); 
+		if(messageText.length == 0) {
+			$('#message').text(getSudokuHint(twoDGrid));
+		} else {
+			$('#message').text(messageText);
+		}
 	});//end click
 
 	function findPossibleSquare() {
@@ -459,13 +449,59 @@ $(function() {
 					possibleNumbers = getPossibleNumbers(twoDGrid,y,x);
 					console.log(possibleNumbers);
 					if (possibleNumbers.length == 1) {
-						$('#message').text("Check x=" + x + " y=" + y);
-						return;
+						//$('#message').text("Check x=" + x + " y=" + y);
+						return "Check x=" + x + " y=" + y;
 					}
 				}
 			}
 		}
-		$('#message').text("Sorry I couldn't find anything");
+		return "";
+	}
+
+	function getSudokuHint(board) {
+		for (let num = 1; num <= 9; num++) {
+			for (let boxRow = 0; boxRow < 3; boxRow++) {
+				for (let boxCol = 0; boxCol < 3; boxCol++) {
+					let possibleCells = [];
+	
+					// Iterate over the 3x3 square
+					for (let row = boxRow * 3; row < boxRow * 3 + 3; row++) {
+						for (let col = boxCol * 3; col < boxCol * 3 + 3; col++) {
+							if (board[row][col] === 0 && canPlace(board, row, col, num)) {
+								possibleCells.push({ row, col });
+							}
+						}
+					}
+	
+					// If exactly one cell can contain this number, return a hint
+					if (possibleCells.length === 1) {
+						return `Place ${num} in row ${possibleCells[0].row + 1}, col ${possibleCells[0].col + 1}`;
+					}
+				}
+			}
+		}
+		return "Sorry I couldn't find anything";
+	}
+	
+	// Check if a number can be placed at board[row][col]
+	function canPlace(board, row, col, num) {
+		// Check row
+		for (let c = 0; c < 9; c++) {
+			if (board[row][c] === num) return false;
+		}
+		// Check column
+		for (let r = 0; r < 9; r++) {
+			if (board[r][col] === num) return false;
+		}
+		// Check 3x3 box
+		let boxRowStart = Math.floor(row / 3) * 3;
+		let boxColStart = Math.floor(col / 3) * 3;
+		for (let r = 0; r < 3; r++) {
+			for (let c = 0; c < 3; c++) {
+				if (board[boxRowStart + r][boxColStart + c] === num) return false;
+			}
+		}
+		return true;
 	}
 
 	function getPossibleNumbers(grid, row, col) {
