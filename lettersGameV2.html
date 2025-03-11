@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Letters Round Solver
+title: Letters Round Solver V2
 permalink: /letters-round-solverV2/
 ---
 <style>
@@ -78,7 +78,6 @@ permalink: /letters-round-solverV2/
 </head>
 <body>
 	<div id="main">
-		<h1>Currently Not In Service</h1>
 		<span class="label">letters:</span>
 		<input id="letters" type="text"/>
 		<span class="button-green" id="solveIt">Solve</span>
@@ -135,6 +134,7 @@ async function findLongestWords(letters) {
 				return
 			}
 			$('#solveIt').addClass('disabled');
+			var words
 			var letters = $('#letters').val();
 			if (letters.length < 4 || letters.length > 9) {
 				$('#answer').text("Please enter between 4 and 9 letters");
@@ -144,7 +144,7 @@ async function findLongestWords(letters) {
 			$('#havePatience').addClass('seen');
 			//solvePuzzle(letters);
 			findLongestWords(letters).then(words => console.log(words));
-			
+			$('#answer').text(words);
 			
 		})// end click
 		
