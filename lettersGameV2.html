@@ -143,8 +143,8 @@ async function findLongestWords(letters) {
 			$('#havePatience').removeClass('hidden');
 			$('#havePatience').addClass('seen');
 			//solvePuzzle(letters);
-			results = findLongestWords(letters);//.then(words => console.log(words));
-			$('#answer').text(JSON.stringify(results,null,2));
+			findLongestWords(letters).then(words => results);
+			$('#answer').text(results);
 			
 		})// end click
 		
