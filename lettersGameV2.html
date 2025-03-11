@@ -1,0 +1,133 @@
+---
+layout: page
+title: Letters Round Solver
+permalink: /letters-numbers-solver/
+---
+<style>
+	html {
+		text-align: center;
+	}
+	#main {
+		text-align: center;
+		width: 480px;
+		margin: auto;
+		font-size: 20px;
+	}
+	.num {
+		border:solid 1px;
+		border-color: #ddd;
+		color: #333;
+		line-height: 20px;
+		display: inline-block;
+		
+	}
+	.num {
+		width: 50px;
+		height: 50px;
+		margin-right: 3px;
+	}
+	.label {
+		font-size: 30px;
+		line-height: 50px;
+	}
+	input {
+		border: 5px solid white; 
+		-webkit-box-shadow: 
+		  inset 0 0 8px  rgba(0,0,0,0.1),
+				0 0 16px rgba(0,0,0,0.1); 
+		-moz-box-shadow: 
+		  inset 0 0 8px  rgba(0,0,0,0.1),
+				0 0 16px rgba(0,0,0,0.1); 
+		box-shadow: 
+		  inset 0 0 8px  rgba(0,0,0,0.1),
+				0 0 16px rgba(0,0,0,0.1); 
+		padding: 15px;
+		background: rgba(255,255,255,0.5);
+		margin: 0 0 10px 0;
+		display: inline;
+		width: 160px;
+		text-align: center;
+}
+
+.button-green{
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 13px;
+    font-size: 18px;
+    text-decoration: none;
+	cursor: pointer;
+}
+
+.button-green {
+    background: rgb(28, 184, 65);
+    border-color: rgb(28, 184, 65);
+}
+
+.disabled {
+	cursor: default;
+}
+
+#answer {
+	width: 75%;
+	margin: 10px auto;
+}
+	
+	
+</style>
+</head>
+<body>
+	<div id="main">
+		<h1>Currently Not In Service</h1>
+		<span class="label">letters:</span>
+		<input id="letters" type="text"/>
+		<span class="button-green" id="solveIt">Solve</span>
+		<pre id="answer"></pre>
+		<div></div>
+		<div></div>
+	</div>
+
+<script>
+	
+	function solvePuzzle(letters)
+	{
+		var newPuzzle;
+		var count = 0;
+		$('#container').css('cursor','wait');
+		$('#answer').text('...please wait\nThe server response may take a few seconds.');
+		//$.get("http://archives.smoothwebs.co.uk/lettersGame5.php?letters=" + letters, function( data ) 
+		$.get("http://pethippo.atwebpages.com/phpbin/lettersGame/lettersGame5.php?letters=" + letters, function( data ) 
+		      {
+			console.log(data);
+			$('#answer').text(data);
+		});
+	}
+	
+	$(function() {
+		
+		$(':input').blur(function() {
+			if ($('#solveIt').hasClass('disabled')) {
+				$('#solveIt').removeClass('disabled');
+			}
+		}); // end blue
+		
+		$('#solveIt').click(function() {
+			if ($('#solveIt').hasClass('disabled')) {
+				return
+			}
+			$('#solveIt').addClass('disabled');
+			var letters = $('#letters').val();
+			if (letters.length < 4 || letters.length > 9) {
+				$('#answer').text("Please enter between 4 and 9 letters");
+				return
+			}
+			$('#havePatience').removeClass('hidden');
+			$('#havePatience').addClass('seen');
+			solvePuzzle(letters);
+			
+			
+		})// end click
+		
+	});//end ready
+	
+</script>
