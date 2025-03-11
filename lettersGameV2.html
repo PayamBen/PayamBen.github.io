@@ -119,8 +119,8 @@ async function findLongestWords(letters) {
 }
 
 // Example usage
-let letters = "cartaecr"; // Example set of letters
-findLongestWords(letters).then(words => console.log(words));
+//let letters = "cartaecr"; // Example set of letters
+//findLongestWords(letters).then(words => console.log(words));
 	
 	$(function() {
 		
@@ -142,7 +142,8 @@ findLongestWords(letters).then(words => console.log(words));
 			}
 			$('#havePatience').removeClass('hidden');
 			$('#havePatience').addClass('seen');
-			solvePuzzle(letters);
+			//solvePuzzle(letters);
+			findLongestWords(letters).then(words => console.log(words));
 			
 			
 		})// end click
