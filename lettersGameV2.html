@@ -82,40 +82,52 @@ permalink: /letters-round-solverV2/
 		<input id="letters" type="text"/>
 		<span class="button-green" id="solveIt">Solve</span>
 		<pre id="answer"></pre>
+		<ul id="wordList"></ul>
 		<div></div>
 		<div></div>
 	</div>
 
 <script>
 	
-	// Load a large dictionary from an API or local file
-async function loadDictionary() {
-    const response = await fetch("https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"); 
-    const text = await response.text();
-    return text.split("\n").map(word => word.trim()); // Convert to an array
-}
+	async function findLongestWords(letters) {
+            const response = await fetch("https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt");
+            const text = await response.text();
+            const dictionary = text.split("\n").map(word => word.trim());
 
-// Function to check if a word can be made from given letters
-function canFormWord(word, letters) {
-    let availableLetters = letters.split(""); 
-    for (let char of word) {
-        let index = availableLetters.indexOf(char);
-        if (index === -1) return false;
-        availableLetters.splice(index, 1); 
-    }
-    return true;
-}
+            function canFormWord(word, letters) {
+                let availableLetters = letters.split("");
+                for (let char of word) {
+                    let index = availableLetters.indexOf(char);
+                    if (index === -1) return false;
+                    availableLetters.splice(index, 1);
+                }
+                return true;
+            }
 
-// Find all longest valid words
-async function findLongestWords(letters) {
-    let dictionary = await loadDictionary(); 
-    let possibleWords = dictionary.filter(word => canFormWord(word, letters)); 
+            let possibleWords = dictionary.filter(word => canFormWord(word, letters));
+            if (possibleWords.length === 0) return [];
 
-    if (possibleWords.length === 0) return "No valid words found";
+            let maxLength = Math.max(...possibleWords.map(word => word.length));
+            return possibleWords.filter(word => word.length === maxLength);
+        }
 
-    let maxLength = Math.max(...possibleWords.map(word => word.length)); 
-    return possibleWords.filter(word => word.length === maxLength); // Return all longest words
-}
+        async function solve() {
+            let letters = document.getElementById("lettersInput").value.toLowerCase();
+            let words = await findLongestWords(letters);
+           
+            let wordList = document.getElementById("wordList");
+            wordList.innerHTML = ""; // Clear previous results
+
+            if (words.length === 0) {
+                wordList.innerHTML = "<li>No valid words found</li>";
+            } else {
+                words.forEach(word => {
+                    let li = document.createElement("li");
+                    li.textContent = word;
+                    wordList.appendChild(li);
+                });
+            }
+        }
 
 // Example usage
 //let letters = "cartaecr"; // Example set of letters
@@ -142,11 +154,27 @@ async function findLongestWords(letters) {
 			}
 			$('#havePatience').removeClass('hidden');
 			$('#havePatience').addClass('seen');
-			//solvePuzzle(letters);
-			findLongestWords(letters).then(words => results);
-			$('#answer').text(results);
+			solve();
 			
 		})// end click
+
+		async function solve() {
+            let letters = document.getElementById("lettersInput").value.toLowerCase();
+            let words = await findLongestWords(letters);
+           
+            let wordList = $('#letters').val();
+            wordList.innerHTML = ""; // Clear previous results
+
+            if (words.length === 0) {
+                wordList.innerHTML = "<li>No valid words found</li>";
+            } else {
+                words.forEach(word => {
+                    let li = document.createElement("li");
+                    li.textContent = word;
+                    wordList.appendChild(li);
+                });
+            }
+        }
 		
 	});//end ready
 	
