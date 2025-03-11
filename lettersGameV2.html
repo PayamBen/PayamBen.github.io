@@ -159,10 +159,10 @@ permalink: /letters-round-solverV2/
 		})// end click
 
 		async function solve() {
-            let letters = document.getElementById("lettersInput").value.toLowerCase();
+            let letters = $('#letters').val();
             let words = await findLongestWords(letters);
            
-            let wordList = $('#letters').val();
+            let wordList = document.getElementById("wordList");
             wordList.innerHTML = ""; // Clear previous results
 
             if (words.length === 0) {
