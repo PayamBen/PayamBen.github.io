@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Letters Round Solver V2"
+title:  "Word Game Solver"
 date:   2025-03-11 16:30:00
 categories: game basic
 ---
