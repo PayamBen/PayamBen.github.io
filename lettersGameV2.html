@@ -110,27 +110,6 @@ permalink: /Word-Game-solverV2/
             return possibleWords.filter(word => word.length === maxLength);
         }
 
-        async function solve() {
-            let letters = $('#letters').val().toLowerCase();
-            let words = await findLongestWords(letters);
-           
-            let wordList = document.getElementById("wordList");
-            wordList.innerHTML = ""; // Clear previous results
-
-            if (words.length === 0) {
-                wordList.innerHTML = "<li>No valid words found</li>";
-            } else {
-                words.forEach(word => {
-                    let li = document.createElement("li");
-                    li.textContent = word;
-                    wordList.appendChild(li);
-                });
-            }
-        }
-
-// Example usage
-//let letters = "cartaecr"; // Example set of letters
-//findLongestWords(letters).then(words => console.log(words));
 	
 	$(function() {
 		
@@ -158,7 +137,7 @@ permalink: /Word-Game-solverV2/
 		})// end click
 
 		async function solve() {
-            let letters = $('#letters').val();
+            let letters = $('#letters').val().toLowerCase();;
             let words = await findLongestWords(letters);
            
             let wordList = document.getElementById("wordList");
