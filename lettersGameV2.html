@@ -111,7 +111,7 @@ permalink: /letters-round-solverV2/
         }
 
         async function solve() {
-            let letters = document.getElementById("lettersInput").value.toLowerCase();
+            let letters = $('#letters').val().toLowerCase();
             let words = await findLongestWords(letters);
            
             let wordList = document.getElementById("wordList");
