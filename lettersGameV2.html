@@ -77,7 +77,7 @@ permalink: /Word-Game-solverV2/
 </head>
 <body>
 	<div id="main">
-		<span class="label">letters:</span>
+		<p class="label">Enter letters:</p>
 		<input id="letters" type="text"/>
 		<span class="button-green" id="solveIt">Solve</span>
 		<pre id="answer"></pre>
@@ -111,7 +111,7 @@ permalink: /Word-Game-solverV2/
         }
 
         async function solve() {
-            //let letters = $('#letters').val().toLowerCase();
+            let letters = $('#letters').val().toLowerCase();
             let words = await findLongestWords(letters);
            
             let wordList = document.getElementById("wordList");
