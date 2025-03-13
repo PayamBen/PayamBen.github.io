@@ -110,6 +110,67 @@ $('#answer').text('...please wait\nThe server response may take a few seconds.')
 			$('#answer').text(data);
 		});
 	}
+
+        function solveGame() {
+            const numbers = document.getElementById("numbers").value.split(",").map(Number);
+            const target = Number(document.getElementById("target").value);
+            const result = countdownSolver(numbers, target);
+            document.getElementById("solution").innerHTML = result ? result : "No solution found.";
+        }
+
+        function countdownSolver(numbers, target) {
+            let bestSolution = null;
+            let bestDifference = Infinity;
+
+            function generateExpressions(nums) {
+                if (nums.length === 1) return new Set([nums[0].toString()]);
+
+                const expressions = new Set();
+
+                for (let i = 0; i < nums.length; i++) {
+                    for (let j = i + 1; j < nums.length; j++) {
+                        const remaining = nums.filter((_, index) => index !== i && index !== j);
+                        const a = nums[i], b = nums[j];
+
+                        const operations = [
+                            { result: a + b, expr: `(${a} + ${b})` },
+                            { result: a - b, expr: `(${a} - ${b})` },
+                            { result: b - a, expr: `(${b} - ${a})` },
+                            { result: a * b, expr: `(${a} × ${b})` }
+                        ];
+
+                        if (b !== 0 && a % b === 0) {
+                            operations.push({ result: a / b, expr: `(${a} ÷ ${b})` });
+                        }
+                        if (a !== 0 && b % a === 0) {
+                            operations.push({ result: b / a, expr: `(${b} ÷ ${a})` });
+                        }
+
+                        for (const { result, expr } of operations) {
+                            if (result > 0) {
+                                const newExpressions = generateExpressions([result, ...remaining]);
+                                for (const newExpr of newExpressions) {
+                                    expressions.add(newExpr.replace(result, expr));
+                                }
+
+                                const diff = Math.abs(result - target);
+                                if (diff < bestDifference) {
+                                    bestDifference = diff;
+                                    bestSolution = expr;
+                                }
+
+                                if (bestDifference === 0) return expressions;
+                            }
+                        }
+                    }
+                }
+
+                return expressions;
+            }
+
+            generateExpressions(numbers);
+            return bestSolution;
+        }
 	
 	$(function() {
 		
@@ -140,7 +201,7 @@ $('#answer').text('...please wait\nThe server response may take a few seconds.')
 					$('#answer').text("largest card value allowed is 500");
 					return
 				}
-				if (numbers[i] <= 0) {
+				if (numbers[i] < 1) {
 					$('#answer').text("smallest card value allowed is 1");
 					return
 				}
@@ -148,7 +209,8 @@ $('#answer').text('...please wait\nThe server response may take a few seconds.')
 			$('#havePatience').removeClass('hidden');
 			$('#havePatience').addClass('seen');
 			
-			solvePuzzle(numbers, target)
+			const result = countdownSolver(numbers, target);
+            document.getElementById("answer").innerHTML = result ? result : "No solution found.";
 			
 		})// end click
 		
