@@ -96,22 +96,8 @@ permalink: /countdown-number-game-solver/
 	</div>
 
 <script>
-	
-	function solvePuzzle(nums, target)
-	{
-		var newPuzzle;
-		var count = 0;
-		$('#container').css('cursor','wait');
-$('#answer').text('...please wait\nThe server response may take a few seconds.');
-		//$.get("http://archives.smoothwebs.co.uk/process-new.php?n1=" + nums[0] + "&n2=" + nums[1] + "&n3=" + nums[2] + "&n4=" + nums[3] + "&n5=" + nums[4] + "&n6=" + nums[5] + "&target="+ target, function( data ) {
-		$.get("https://pethippo.rf.gd/nbrRndSolver.php?n1=" + nums[0] + "&n2=" + nums[1] + "&n3=" + nums[2] + "&n4=" + nums[3] + "&n5=" + nums[4] + "&n6=" + nums[5] + "&target="+ target, function( data ) {
 
-			console.log(data);
-			$('#answer').text(data);
-		});
-	}
-
-        function solveGame() {
+function solveGame() {
             const numbers = document.getElementById("numbers").value.split(",").map(Number);
             const target = Number(document.getElementById("target").value);
             const result = countdownSolver(numbers, target);
@@ -122,10 +108,15 @@ $('#answer').text('...please wait\nThe server response may take a few seconds.')
             let bestSolution = null;
             let bestDifference = Infinity;
 
-            function generateExpressions(nums) {
-                if (nums.length === 1) return new Set([nums[0].toString()]);
-
-                const expressions = new Set();
+            function generateExpressions(nums, steps = []) {
+                if (nums.length === 1) {
+                    if (nums[0] === target) {
+                        bestSolution = steps.join(" → ");
+                        bestDifference = 0;
+                        return;
+                    }
+                    return;
+                }
 
                 for (let i = 0; i < nums.length; i++) {
                     for (let j = i + 1; j < nums.length; j++) {
@@ -133,39 +124,34 @@ $('#answer').text('...please wait\nThe server response may take a few seconds.')
                         const a = nums[i], b = nums[j];
 
                         const operations = [
-                            { result: a + b, expr: `(${a} + ${b})` },
-                            { result: a - b, expr: `(${a} - ${b})` },
-                            { result: b - a, expr: `(${b} - ${a})` },
-                            { result: a * b, expr: `(${a} × ${b})` }
+                            { result: a + b, expr: `${a} + ${b} = ${a + b}` },
+                            { result: a - b, expr: `${a} - ${b} = ${a - b}` },
+                            { result: b - a, expr: `${b} - ${a} = ${b - a}` },
+                            { result: a * b, expr: `${a} × ${b} = ${a * b}` }
                         ];
 
                         if (b !== 0 && a % b === 0) {
-                            operations.push({ result: a / b, expr: `(${a} ÷ ${b})` });
+                            operations.push({ result: a / b, expr: `${a} ÷ ${b} = ${a / b}` });
                         }
                         if (a !== 0 && b % a === 0) {
-                            operations.push({ result: b / a, expr: `(${b} ÷ ${a})` });
+                            operations.push({ result: b / a, expr: `${b} ÷ ${a} = ${b / a}` });
                         }
 
                         for (const { result, expr } of operations) {
                             if (result > 0) {
-                                const newExpressions = generateExpressions([result, ...remaining]);
-                                for (const newExpr of newExpressions) {
-                                    expressions.add(newExpr.replace(result, expr));
+                                const newSteps = [...steps, expr];
+                                if (Math.abs(result - target) < bestDifference) {
+                                    bestSolution = newSteps.join(" → ");
+                                    bestDifference = Math.abs(result - target);
                                 }
 
-                                const diff = Math.abs(result - target);
-                                if (diff < bestDifference) {
-                                    bestDifference = diff;
-                                    bestSolution = expr;
-                                }
+                                if (bestDifference === 0) return;
 
-                                if (bestDifference === 0) return expressions;
+                                generateExpressions([result, ...remaining], newSteps);
                             }
                         }
                     }
                 }
-
-                return expressions;
             }
 
             generateExpressions(numbers);
@@ -215,5 +201,5 @@ $('#answer').text('...please wait\nThe server response may take a few seconds.')
 		})// end click
 		
 	});//end ready
-	
+
 </script>
