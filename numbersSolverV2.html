@@ -90,6 +90,7 @@ permalink: /countdown-number-game-solver/
 		<input id="num4" type="text"/>
 		<input id="num5" type="text"/>
 		<span class="button-green" id="solveIt">Solve</span>
+		<span class="button-green" id="ClearAll">Clear</span>
 		<p id="answer"></p>
 		<div></div>
 		<div></div>
@@ -198,6 +199,18 @@ function solveGame() {
 			const result = countdownSolver(numbers, target);
             document.getElementById("answer").innerHTML = result ? result : "No solution found.";
 			
+		})// end click
+
+		$('#ClearAll').click(function() {
+
+			$('#target').text("");
+			$('#answer').text("target is too small");
+			$('#num1').text("");
+			$('#num2').text("");
+			$('#num3').text("");
+			$('#num4').text("");
+			$('#num5').text("");
+			$('#num6').text("");
 		})// end click
 		
 	});//end ready
