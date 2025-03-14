@@ -81,14 +81,16 @@ permalink: /countdown-number-game-solver/
 </head>
 <body>
 	<div id="main">
-		<span class="label">Target:</span><br/><input id="target" type="text"/><br/>
-		<span class="label">Numbers:</span><br/>
-		<input id="num0" type="text"/>
-		<input id="num1" type="text"/>
-		<input id="num2" type="text"/>
-		<input id="num3" type="text"/>
-		<input id="num4" type="text"/>
-		<input id="num5" type="text"/>
+		<form id="inputs">
+			<span class="label">Target:</span><br/><input id="target" type="text"/><br/>
+			<span class="label">Numbers:</span><br/>
+			<input id="num0" type="text"/>
+			<input id="num1" type="text"/>
+			<input id="num2" type="text"/>
+			<input id="num3" type="text"/>
+			<input id="num4" type="text"/>
+			<input id="num5" type="text"/>
+		</form>
 		<span class="button-green" id="solveIt">Solve</span>
 		<span class="button-green" id="ClearAll">Clear</span>
 		<p id="answer"></p>
@@ -203,14 +205,9 @@ function solveGame() {
 
 		$('#ClearAll').click(function() {
 
-			$('#target').innerHTML = "";
-			$('#answer').innerHTML = "";
-			$('#num1').innerHTML = "";
-			$('#num2').innerHTML = "";
-			$('#num3').innerHTML = "";
-			$('#num4').innerHTML = "";
-			$('#num5').innerHTML = "";
-			$('#num6').innerHTML = "";
+			document.getElementById('inputs').reset();
+			document.getElementById('#answer').innerHTML = "";
+			
 		})// end click
 		
 	});//end ready
