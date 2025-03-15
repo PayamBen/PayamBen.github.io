@@ -373,7 +373,7 @@ function toggleNumbers() {
 function setTimer() {
 	var e = document.getElementById("time");
 	var value = Number(e.value);
-	getElementById("timer").innerHTML = value;
+	document.getElementById("timer").innerHTML = value;
 }
 
 $(function() {
