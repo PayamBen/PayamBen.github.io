@@ -333,6 +333,7 @@ function resetGame() {
 	cardsDisplayed = 0;
 	clearTimeout(timer);
 	toggleNumbers();
+	setCheckAnswerStatus(false);
 	setSolutuionStatus(false);
 	document.getElementById('solutionArea').innerHTML = "";
 	$('#timer').html('30');
@@ -407,6 +408,8 @@ function setCheckAnswerStatus(flag) {
 		$('#checkAnswer').addClass('enabled');
 	}
 }
+
+
 
 $(function() {
 	$('#large').click(function() {
