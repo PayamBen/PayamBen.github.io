@@ -222,8 +222,9 @@ function generateNumber() {
 	$('#total').text(total);
 	answer = forumla;
 	console.log('answer =' + answer);	
-	
+	document.getElementById('solutionArea').innerHTML = answer;
 }
+
 
 function pickNumber() {
 	$('#total').text(Math.floor((Math.random() * 900) + 100));
@@ -326,6 +327,7 @@ function resetGame() {
 	clearTimeout(timer);
 	toggleNumbers();
 	setSolutuionStatus(false);
+	document.getElementById('solutionArea').innerHTML = "";
 	$('#timer').html('30');
 	$('.card').each(function() {
 		$(this).html('&nbsp;');
@@ -429,6 +431,14 @@ $(function() {
 	}); // end click
 	
 	$('#restart').click(function() {
+		// check that a game has been started
+		if (!$('#start').hasClass('enabled')) {
+			return;
+		}
+		resetGame();
+	}); // end click
+
+	$('#showASolution').click(function() {
 		// check that a game has been started
 		if (!$('#start').hasClass('enabled')) {
 			return;
