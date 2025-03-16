@@ -144,6 +144,10 @@ function controlStartButton() {
 		$('#start').addClass('enabled');
 		return;
 	}
+	if (cardsDisplayed == 6 && $('#start').hasClass('enabled')) {
+		$('#start').removeClass('enabled');
+		$('#start').addClass('disabled');
+	}
 	if (cardsDisplayed < 6 && $('#start').hasClass('enabled')) {
 		$('#start').removeClass('enabled');
 		$('#start').addClass('disabled');
@@ -436,6 +440,7 @@ $(function() {
 		toggleNumbers();
 		setSolutuionStatus(false);
 		setCheckAnswerStatus(true);
+		controlStartButton();
 		setTimer();
 		$('#answer').text('');
 		timer=setInterval(function(){myTimer()},1000);
