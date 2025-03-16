@@ -25,6 +25,9 @@ function myTimer() {
 		}else {
 			$('#answer').append(total);
 		}
+		$('#showASolution').removeClass('disabled');
+		$('#showASolution').addClass('enabled');
+		$('#del').removeClass('enabled');
 	}else {
 		document.getElementById("timer").innerHTML = document.getElementById("timer").innerHTML - 1;
 	}
@@ -376,6 +379,11 @@ function setTimer() {
 	document.getElementById("timer").innerHTML = value;
 }
 
+function hideSolutuion() {
+	$('#showASolution').removeClass('enabled');
+	$('#showASolution').addClass('disabled');
+}
+
 $(function() {
 	$('#large').click(function() {
 		if ($(this).hasClass('disabled')) {
@@ -409,6 +417,7 @@ $(function() {
 		flipCard();
 		generateNumber();
 		toggleNumbers();
+		hideSolutuion();
 		setTimer();
 		$('#answer').text('');
 		timer=setInterval(function(){myTimer()},1000);
