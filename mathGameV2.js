@@ -335,6 +335,7 @@ function resetGame() {
 	toggleNumbers();
 	setCheckAnswerStatus(false);
 	setSolutuionStatus(false);
+	$('#solutionArea').addClass('hide');
 	document.getElementById('solutionArea').innerHTML = "";
 	$('#timer').html('30');
 	$('.card').each(function() {
