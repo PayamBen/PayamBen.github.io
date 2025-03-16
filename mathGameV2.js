@@ -440,7 +440,7 @@ $(function() {
 		toggleNumbers();
 		setSolutuionStatus(false);
 		setCheckAnswerStatus(true);
-		controlStartButton();
+		//controlStartButton();
 		setTimer();
 		$('#answer').text('');
 		timer=setInterval(function(){myTimer()},1000);
