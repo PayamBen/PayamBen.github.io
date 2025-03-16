@@ -454,7 +454,7 @@ $(function() {
 		if (!$('#start').hasClass('enabled')) {
 			return;
 		}
-		resetGame();
+		$('#solutionArea').removeClass('hide');
 	}); // end click
 	
 	$('.sign').click(function() {
