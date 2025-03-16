@@ -391,6 +391,16 @@ function setSolutuionStatus(flag) {
 	}
 }
 
+function setCheckAnswerStatus(flag) {
+	if (flag == false) {
+		$('#checkAnswer').removeClass('enabled');
+		$('#checkAnswer').addClass('disabled');
+	} else {
+		$('#checkAnswer').removeClass('disabled');
+		$('#checkAnswer').addClass('enabled');
+	}
+}
+
 $(function() {
 	$('#large').click(function() {
 		if ($(this).hasClass('disabled')) {
@@ -425,6 +435,7 @@ $(function() {
 		generateNumber();
 		toggleNumbers();
 		setSolutuionStatus(false);
+		setCheckAnswerStatus(true);
 		setTimer();
 		$('#answer').text('');
 		timer=setInterval(function(){myTimer()},1000);
