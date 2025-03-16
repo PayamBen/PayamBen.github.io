@@ -13,20 +13,23 @@ Array.prototype.remove = function(from, to) {
   return this.push.apply(this, rest);
 };
 
+function finished() {
+	clearTimeout(timer);
+	var total = scoreGame();
+	if (total == $('#total').text()) {
+		$('#notice').text('Great Work!');
+		$('#notice').fadeIn(300);
+	}else {
+		$('#answer').append(total);
+	}
+	setSolutuionStatus(true);
+	$('#del').removeClass('enabled');
+}
+
 function myTimer() {
-    //var d = new Date();
     var time = document.getElementById("timer").innerHTML;
 	if (time == 0) {
-		clearTimeout(timer);
-		var total = scoreGame();
-		if (total == $('#total').text()) {
-			$('#notice').text('Great Work!');
-			$('#notice').fadeIn(300);
-		}else {
-			$('#answer').append(total);
-		}
-		setSolutuionStatus(true);
-		$('#del').removeClass('enabled');
+		finished();
 	}else {
 		document.getElementById("timer").innerHTML = document.getElementById("timer").innerHTML - 1;
 	}
@@ -226,7 +229,7 @@ function generateNumber() {
 	$('#total').text(total);
 	answer = forumla;
 	console.log('answer =' + answer);	
-	document.getElementById('solutionArea').innerHTML = answer;
+	document.getElementById('solutionArea').innerHTML = "Solution =" + answer;
 }
 
 
@@ -460,6 +463,15 @@ $(function() {
 			return;
 		}
 		$('#solutionArea').removeClass('hide');
+	}); // end click
+
+	
+	$('#checkAnswer').click(function() {
+		// check that a game has been started
+		if (!$('#start').hasClass('enabled')) {
+			return;
+		}
+		finished();
 	}); // end click
 	
 	$('.sign').click(function() {
