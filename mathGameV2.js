@@ -25,8 +25,7 @@ function myTimer() {
 		}else {
 			$('#answer').append(total);
 		}
-		$('#showASolution').removeClass('disabled');
-		$('#showASolution').addClass('enabled');
+		setSolutuionStatus(true);
 		$('#del').removeClass('enabled');
 	}else {
 		document.getElementById("timer").innerHTML = document.getElementById("timer").innerHTML - 1;
@@ -379,9 +378,14 @@ function setTimer() {
 	document.getElementById("timer").innerHTML = value;
 }
 
-function hideSolutuion() {
-	$('#showASolution').removeClass('enabled');
-	$('#showASolution').addClass('disabled');
+function setSolutuionStatus(flag) {
+	if (flag) {
+		$('#showASolution').removeClass('enabled');
+		$('#showASolution').addClass('disabled');
+	} else {
+		$('#showASolution').removeClass('disabled');
+		$('#showASolution').addClass('enabled');
+	}
 }
 
 $(function() {
