@@ -421,7 +421,7 @@ $(function() {
 		flipCard();
 		generateNumber();
 		toggleNumbers();
-		hideSolutuion();
+		setSolutuionStatus(false);
 		setTimer();
 		$('#answer').text('');
 		timer=setInterval(function(){myTimer()},1000);
