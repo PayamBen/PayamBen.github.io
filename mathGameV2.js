@@ -325,6 +325,7 @@ function resetGame() {
 	cardsDisplayed = 0;
 	clearTimeout(timer);
 	toggleNumbers();
+	setSolutuionStatus(false);
 	$('#timer').html('30');
 	$('.card').each(function() {
 		$(this).html('&nbsp;');
@@ -379,7 +380,7 @@ function setTimer() {
 }
 
 function setSolutuionStatus(flag) {
-	if (flag) {
+	if (flag == false) {
 		$('#showASolution').removeClass('enabled');
 		$('#showASolution').addClass('disabled');
 	} else {
