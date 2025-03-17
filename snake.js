@@ -1,199 +1,88 @@
-var player;
-var computer;
-var playersTurn;
-var gameState = [];
-var leaf_count=0;
-var INFTY = 100000;
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
-function nextMove() {
-	//Set best as lowest possible
-	var best = {score:-INFTY, move:-1}
-	
-	var temp_score = 0;
+// Game settings
+const box = 20; // Snake unit size
+const canvasSize = canvas.width;
+const snake = [{ x: 10 * box, y: 10 * box }];
+let food = generateFood();
+let direction = "RIGHT";
+let score = 0;
 
-	leaf_count=0;
-	
-	for(var i=0; i<9; i++) {
-		if(isEmpty(i)) {
-			//Make possible move
-			gameState[i]=computer;
-
-			//Compute best move score for human player
-			temp_score = -negaMax(player);
-			
-			//Undo previous move
-			gameState[i]='n';
-
-			//Take greatest score and move
-			if(temp_score > best.score) {
-				best.move = i;
-				best.score = temp_score;
-			}
-		}
-	}
-
-	gameState[best.move] = computer;
-
-	$('#' + best.move).text(computer);
-	console.log(best);
-	
-	//if there is a winner it must be the computer
-	if (checkWinner() != 0) {
-		status("you lost");
-		return;
-	}
-	if (checkTie()) {
-		status("It's a draw");
-	}else {
-		playersTurn = true;
-		status("your move");
-	}
+// Generate random food position
+function generateFood() {
+    return {
+        x: Math.floor(Math.random() * (canvasSize / box)) * box,
+        y: Math.floor(Math.random() * (canvasSize / box)) * box,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)` // Random color
+    };
 }
 
-function negaMax(thisPlayer) {
-	var r = checkWinner();
-	if(r != 0) {
-		leaf_count++;
-		if(r==thisPlayer) return 100;
-		else return -100;
-	}
+// Control snake movement
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+    if (key === "ArrowUp" && direction !== "DOWN") direction = "UP";
+    if (key === "ArrowDown" && direction !== "UP") direction = "DOWN";
+    if (key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
+    if (key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
+});
 
-	if(checkTie()) {
-		leaf_count++;
-		return 0;
-	} 
+// Game loop
+function gameLoop() {
+    // Move the snake
+    let headX = snake[0].x;
+    let headY = snake[0].y;
 
-	//Initiate temporary variables
-	var max = -INFTY;
-	var temp = 0;
+    if (direction === "UP") headY -= box;
+    if (direction === "DOWN") headY += box;
+    if (direction === "LEFT") headX -= box;
+    if (direction === "RIGHT") headX += box;
 
-	//Perform and compute all further possible moves
-	for(var i=0; i<9; i++) {
-		if(isEmpty(i)){
-			//Do possible move
-			gameState[i]=thisPlayer;
+    // Check collision with walls
+    if (headX < 0 || headY < 0 || headX >= canvasSize || headY >= canvasSize) {
+        alert("Game Over! Your score: " + score);
+        document.location.reload();
+    }
 
-			//Compute best score
-			temp = -negaMax(thisPlayer==player ? computer:player)*.5;
-			
-			//Undo previous move
-			gameState[i]='n';
+    // Check collision with self
+    for (let i = 1; i < snake.length; i++) {
+        if (snake[i].x === headX && snake[i].y === headY) {
+            alert("Game Over! Your score: " + score);
+            document.location.reload();
+        }
+    }
 
-			//Swap max if necessary
-			if(temp > max) {
-				max = temp;
-			}
-		}
-	}
-	return max;
+    // Check if snake eats food
+    if (headX === food.x && headY === food.y) {
+        score++;
+        food = generateFood();
+    } else {
+        snake.pop(); // Remove last tail segment
+    }
+
+    // Add new head to the snake
+    snake.unshift({ x: headX, y: headY });
+
+    // Render the game
+    drawGame();
 }
 
-//Just a crapload of cases
-function checkWinner() {
-	if(gameState[4]!='n') {
-		if(gameState[4]==gameState[8] && gameState[4]==gameState[0])
-			return gameState[4];
-		else if(gameState[4]==gameState[2] && gameState[4]==gameState[6])
-			return gameState[4];
-		else if(gameState[1]==gameState[4] && gameState[4]==gameState[7])
-			return gameState[4];
-		else if(gameState[3]==gameState[4] && gameState[4]==gameState[5])
-			return gameState[4]
-	}
-	if(gameState[0]!='n') {
-		if(gameState[1]==gameState[0] && gameState[0]==gameState[2])
-			return gameState[0];
-		if(gameState[0]==gameState[3] && gameState[0]==gameState[6])
-			return gameState[0]
-	}
-	if(gameState[2]!='n') {
-		if(gameState[2]==gameState[5] && gameState[8]==gameState[5])
-			return gameState[2];
-	}
-	if(gameState[6]!='n') {
-		if(gameState[7]==gameState[8] && gameState[6]==gameState[7])
-			return gameState[6];
-	}
-	return 0;
+// Draw everything
+function drawGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw food
+    ctx.fillStyle = food.color;
+    ctx.fillRect(food.x, food.y, box, box);
+
+    // Draw snake with colorful segments
+    for (let i = 0; i < snake.length; i++) {
+        ctx.fillStyle = `hsl(${(i * 30) % 360}, 100%, 50%)`;
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+    }
 }
 
-function startGame(xorO) {
-	for(var i = 0; i < 9; i++) {
-		$('#' + i).html("&nbsp;");
-		gameState[i] = 'n';
-	}
-	
-	if (xorO == 'O') {
-		player = 'O';
-		computer = 'X';
-		playersTurn = false;
-		nextMove();
-	}else {
-		player = 'X';
-		computer = 'O';
-		playersTurn = true;
-	}
-}
-
-//Check for empty 
-function isEmpty(cellno) {
-	return gameState[cellno]=='n';
-}
-
-function status(e) {
-	$('#status').text(e);
-}
-
-//Check for a tie. Run only after checking for a winner
-function checkTie() {
-	for(var i=0; i<9; i++) {
-		if(gameState[i]=='n') return false;
-	}
-	return true;
-}
-	
-$(function() {
-	
-	$('#status').text("Game loaded you are playing as X");
-	startGame('x');
-	
-	$(".cell").click(function() {
-		if (!playersTurn) {
-			return;
-		}
-		$(this).text(player);
-		gameState[parseInt($(this).attr("id"))] = player;
-		playersTurn = false;
-		if (checkWinner() != 0) {
-			alert("You have won");
-			return;
-		}
-		if (checkTie()) {
-			status("It's a draw");
-		}else {
-			nextMove();
-		}
-	}); // end click
-	
-	$('#newGame').click(function() {
-		$('#popupLayer').slideDown(200);
-	}); //end click
-	
-	$('#newGame2').click(function() {
-		startGame('X');
-		$('#popupLayer').slideUp(200);
-		$('#status').text("Game loaded you are playing as X");
-	}); //end click
-	
-	$('#newGame3').click(function() {
-		startGame('O');
-		$('#popupLayer').slideUp(200);
-		$('#status').text("Game loaded you are playing as O");
-	}); //end click
-	
-	$('#close').click(function() {
-		$('#popupLayer').slideUp(200);
-		
-	}); // end click
-	console.log(gameState);
-});//end ready
+// Start the game loop
+setInterval(gameLoop, 100);
