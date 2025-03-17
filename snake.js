@@ -40,14 +40,18 @@ function gameLoop() {
 
     // Check collision with walls
     if (headX < 0 || headY < 0 || headX >= canvasSize || headY >= canvasSize) {
-        alert("Game Over! Your score: " + score);
+        //alert("Game Over! Your score: " + score);
+        document.getElementById("#scoreBaord").innerHTML = "Game Over! Your score: " + score;
+        await(5000);
         document.location.reload();
     }
 
     // Check collision with self
     for (let i = 1; i < snake.length; i++) {
         if (snake[i].x === headX && snake[i].y === headY) {
-            alert("Game Over! Your score: " + score);
+            //alert("Game Over! Your score: " + score);
+            document.getElementById("#scoreBaord").innerHTML = "Game Over! Your score: " + score;
+            await(5000);
             document.location.reload();
         }
     }
@@ -83,6 +87,8 @@ function drawGame() {
         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
     }
 }
+
+
 
 // Start the game loop
 setInterval(gameLoop, 100);
