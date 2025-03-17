@@ -19,11 +19,27 @@ permalink: /snake-game/
 	.button-green {
 		background: rgb(28, 184, 65);
 		border-color: rgb(28, 184, 65);
-}
+		color: white;
+		border-radius: 4px;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+		padding: 13px;
+		font-size: 18px;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.theCentre {
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		margin: 2px 2px 2px 2px;
+	}
 </style>
 </head>
 
 <body>
 <canvas id="gameCanvas" width="400" height="400"></canvas>
-<span class="button-green" id="solveIt">Start</span>
+<div class="">
+	<span class="button-green" id="solveIt">Start</span>
+</div>
 <script src="/snake.js"></script>
