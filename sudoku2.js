@@ -294,7 +294,7 @@ function loadPuzzle(level)
 	// Usage
 	const sudoku = new SudokuGenerator();
 	do {
-		newPuzzle = flatten2DArray(sudoku.getPuzzle("easy"));
+		newPuzzle = flatten2DArray(sudoku.getPuzzle(level));
 		console.table(newPuzzle);
 	} while(oneSolution(newPuzzle,0,0) > 1)
 	
