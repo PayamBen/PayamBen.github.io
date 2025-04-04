@@ -293,27 +293,32 @@ function loadPuzzle(level)
 	$('#container').css('cursor','wait');
 	// Usage
 	const sudoku = new SudokuGenerator();
-	const easyPuzzle = sudoku.getPuzzle("easy");
-	console.table(easyPuzzle);
-	$('#container').css('cursor','default');
-	/* 	console.log(data);
-		newPuzzle = data.split('');
-		for(var i = 1; i <= 81; i++) {
-			if (newPuzzle[i - 1] == 0) {
-				count++;
-				$('#' + i).html('&nbsp;');
-				$('#' + i).removeClass('unchangeable');
-				$('#' + i).addClass('changeable');
-			}else
-			{ 
-				$('#' + i).html(newPuzzle[i - 1]);
-				$('#' + i).removeClass('changeable');
-				$('#' + i).addClass('unchangeable');
-			}
+	do {
+	const newPuzzle = flatten2DArray(sudoku.getPuzzle("easy"));
+	} while(legalTable(easyPuzzle))
+	console.table(newPuzzle);
+	clearDisplay();
+	
+	for(var i = 1; i <= 81; i++) {
+		if (newPuzzle[i - 1] == 0) {
+			count++;
+			$('#' + i).html('&nbsp;');
+			$('#' + i).removeClass('unchangeable');
+			$('#' + i).addClass('changeable');
+		}else
+		{ 
+			$('#' + i).html(newPuzzle[i - 1]);
+			$('#' + i).removeClass('changeable');
+			$('#' + i).addClass('unchangeable');
 		}
-		console.log('empty squares ' + count);
-		$('#container').css('cursor','default');
-	}); */
+	}
+	console.log('empty squares ' + count);
+	$('#container').css('cursor','default');
+	 
+}
+
+function flatten2DArray(arr) {
+	return arr.flat();
 }
 
 function legalTable(grid)
@@ -500,21 +505,21 @@ $(function() {
 		quitPuzzle = false;
 		loadPuzzle('easy');
 		$('#popupLayer').slideUp(200);
-	}); //end click
+	}); //easy end click
 	$('#newPuzzle3').click(function() {
 		resetBorderColor();
 		answer = [];
 		quitPuzzle = false;
 		loadPuzzle('medium');
 		$('#popupLayer').slideUp(200);
-	}); //end click
+	}); //medium end click
 	$('#newPuzzle4').click(function() {
 		resetBorderColor();
 		answer = [];
 		quitPuzzle = false;
 		loadPuzzle('hard');
 		$('#popupLayer').slideUp(200);
-	}); //end click
+	}); //hard end click
 
 	$('#hint').click(function() {
 		$('#message').text("looking for hint");
