@@ -295,8 +295,9 @@ function loadPuzzle(level)
 	const sudoku = new SudokuGenerator();
 	do {
 	const newPuzzle = flatten2DArray(sudoku.getPuzzle("easy"));
-	} while(legalTable(newPuzzle))
 	console.table(newPuzzle);
+	} while(un)
+	
 	clearDisplay();
 	
 	for(var i = 1; i <= 81; i++) {
