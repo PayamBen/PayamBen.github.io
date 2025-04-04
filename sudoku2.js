@@ -200,15 +200,103 @@ function puzzleComplete(grid) {
 	return 1;
 }
 
+// Simple Sudoku generator with difficulty settings
+class SudokuGenerator {
+	constructor() {
+	  this.board = this.generateFullBoard();
+	}
+  
+	generateFullBoard() {
+	  const board = Array.from({ length: 9 }, () => Array(9).fill(0));
+	  this.fillBoard(board);
+	  return board;
+	}
+  
+	fillBoard(board) {
+	  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  
+	  const shuffle = (array) => array.sort(() => Math.random() - 0.5);
+  
+	  const isSafe = (board, row, col, num) => {
+		for (let x = 0; x < 9; x++) {
+		  if (board[row][x] === num || board[x][col] === num) return false;
+		}
+		const startRow = row - (row % 3), startCol = col - (col % 3);
+		for (let r = 0; r < 3; r++) {
+		  for (let c = 0; c < 3; c++) {
+			if (board[r + startRow][c + startCol] === num) return false;
+		  }
+		}
+		return true;
+	  };
+  
+	  const solve = (board) => {
+		for (let row = 0; row < 9; row++) {
+		  for (let col = 0; col < 9; col++) {
+			if (board[row][col] === 0) {
+			  const shuffled = shuffle([...numbers]);
+			  for (let num of shuffled) {
+				if (isSafe(board, row, col, num)) {
+				  board[row][col] = num;
+				  if (solve(board)) return true;
+				  board[row][col] = 0;
+				}
+			  }
+			  return false;
+			}
+		  }
+		}
+		return true;
+	  };
+  
+	  solve(board);
+	  return board;
+	}
+  
+	removeNumbers(board, level) {
+	  let attempts;
+	  switch (level) {
+		case "easy": attempts = 30; break;
+		case "medium": attempts = 40; break;
+		case "hard": attempts = 50; break;
+		default: attempts = 40;
+	  }
+  
+	  const puzzle = board.map(row => row.slice());
+  
+	  while (attempts > 0) {
+		const row = Math.floor(Math.random() * 9);
+		const col = Math.floor(Math.random() * 9);
+  
+		if (puzzle[row][col] !== 0) {
+		  puzzle[row][col] = 0;
+		  attempts--;
+		}
+	  }
+	  return puzzle;
+	}
+  
+	getPuzzle(level = "medium") {
+	  const fullBoard = this.generateFullBoard();
+	  return this.removeNumbers(fullBoard, level);
+	}
+  }
+  
+  
+
+
+
 function loadPuzzle(level)
 {
 	var newPuzzle;
 	var count = 0;
 	$('#container').css('cursor','wait');
-	$.get("https://pethippo.rf.gd//make-puzzle.php?level=" + level, function( data ) {
-	//$.get("http://lab/sudoku/make-puzzle.php?level=" + level, function( data ) {
-	
-		console.log(data);
+	// Usage
+	const sudoku = new SudokuGenerator();
+	const easyPuzzle = sudoku.getPuzzle("easy");
+	console.table(easyPuzzle);
+	$('#container').css('cursor','default');
+	/* 	console.log(data);
 		newPuzzle = data.split('');
 		for(var i = 1; i <= 81; i++) {
 			if (newPuzzle[i - 1] == 0) {
@@ -225,7 +313,7 @@ function loadPuzzle(level)
 		}
 		console.log('empty squares ' + count);
 		$('#container').css('cursor','default');
-	});
+	}); */
 }
 
 function legalTable(grid)
