@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Solve-it Sudoku Update"
-date:   2025-04-04 16:55:00
+date:   2025-04-04 16:00:00
 categories: game basic
 ---
 
