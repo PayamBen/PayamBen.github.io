@@ -296,7 +296,7 @@ function loadPuzzle(level)
 	do {
 	const newPuzzle = flatten2DArray(sudoku.getPuzzle("easy"));
 	console.table(newPuzzle);
-	} while(un)
+	} while(oneSolution(newPuzzle,0,0) > 1)
 	
 	clearDisplay();
 	
