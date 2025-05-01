@@ -18,16 +18,16 @@ permalink: /snake-game/
 		}
 		canvas {
 		  background: #000;
-		  margin-top: 20px;
+		  margin-top: 5px;
 		}
 		.controls {
-		  margin-top: 20px;
+		  margin-top: 10px;
 		  display: grid;
 		  grid-template-columns: repeat(3, 60px);
 		  gap: 10px;
 		}
 		.controls button {
-		  padding: 15px;
+		  padding: 10px;
 		  font-size: 18px;
 		  background: #333;
 		  color: #fff;
@@ -37,29 +37,33 @@ permalink: /snake-game/
 		.score {
 		  margin-top: 10px;
 		  font-size: 24px;
+		  display: inline-block;
+		  padding: 10px 20px;
 		}
 		.restart {
 		  margin-top: 10px;
 		  padding: 10px 20px;
 		  font-size: 18px;
-		  background: #ff3333;
+		  background: #df6603;
 		  border: none;
 		  border-radius: 8px;
 		  color: #fff;
+		  float:right;
 		}
 	  </style>
 	</head>
 	<body>
-	  <div class="score">Score: <span id="score">0</span></div>
-	  <canvas id="game" width="400" height="400"></canvas>
+	  <div><div class="score">Score: <span id="score">0</span></div>
+	  <button class="restart" onclick="restartGame()">Restart</button></div>
+	  <canvas id="game" width="360" height="360"></canvas>
 	  <div class="controls">
 		<div></div><button onclick="setDirection('up')">⬆️</button><div></div>
 		<button onclick="setDirection('left')">⬅️</button>
-		<div></div>
+		<button onclick="setDirection('down')">⬇️</button>
 		<button onclick="setDirection('right')">➡️</button>
-		<div></div><button onclick="setDirection('down')">⬇️</button><div></div>
+		<div></div>
 	  </div>
-	  <button class="restart" onclick="restartGame()">Restart</button>
+	  
 	
 	  <script>
 		const canvas = document.getElementById("game");
