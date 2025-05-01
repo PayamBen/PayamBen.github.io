@@ -14,7 +14,6 @@ permalink: /snake-game/
 		  align-items: center;
 		  justify-content: center;
 		  background-color: #111;
-		  color: #fff;
 		}
 		canvas {
 		  background: #000;
@@ -24,6 +23,7 @@ permalink: /snake-game/
 		  margin-top: 10px;
 		  display: grid;
 		  grid-template-columns: repeat(3, 60px);
+		  justify-content: space-evenly;
 		  gap: 10px;
 		}
 		.controls button {
@@ -55,7 +55,7 @@ permalink: /snake-game/
 	<body>
 	  <div><div class="score">Score: <span id="score">0</span></div>
 	  <button class="restart" onclick="restartGame()">Restart</button></div>
-	  <canvas id="game" width="360" height="360"></canvas>
+	  <canvas id="game" width="400" height="400"></canvas>
 	  <div class="controls">
 		<div></div><button onclick="setDirection('up')">⬆️</button><div></div>
 		<button onclick="setDirection('left')">⬅️</button>
